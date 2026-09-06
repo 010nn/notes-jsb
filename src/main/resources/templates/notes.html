@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>My Notes - Notebook</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>My Notes</h1>
+            <div class="header-actions">
+                <span sec:authentication="name"></span>
+                <a th:href="@{/notes/new}" class="btn">New Note</a>
+                <form th:action="@{/logout}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-logout">Logout</button>
+                </form>
+            </div>
+        </div>
+        
+        <div th:if="${success}" class="success" th:text="${success}"></div>
+        
+        <div class="notes-list" th:if="${not #lists.isEmpty(notes)}">
+            <div class="note-card" th:each="note : ${notes}">
+                <h3 th:text="${note.title}"></h3>
+                <p th:text="${#strings.abbreviate(note.content, 200)}"></p>
+                <div class="note-actions">
+                    <a th:href="@{/notes/{id}/edit(id=${note.id})}" class="btn btn-small">Edit</a>
+                    <form th:action="@{/notes/{id}/delete(id=${note.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-small btn-danger" 
+                                onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="empty-state" th:if="${#lists.isEmpty(notes)}">
+            <p>No notes yet. Create your first note!</p>
+        </div>
+    </div>
+</body>
+</html>

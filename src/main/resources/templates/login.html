@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Notebook</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        
+        <div th:if="${param.error}" class="error">
+            Invalid username or password
+        </div>
+        <div th:if="${success}" class="success" th:text="${success}"></div>
+        
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        
+        <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+    </div>
+</body>
+</html>
