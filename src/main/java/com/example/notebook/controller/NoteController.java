@@ -25,8 +25,9 @@ public class NoteController {
     }
 
     @GetMapping("/notes/new")
-    public String newNoteForm(Model model) {
+    public String newNoteForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         model.addAttribute("note", new Note());
+        model.addAttribute("allNotes", noteService.findByUsername(userDetails.getUsername()));
         return "note-form";
     }
 
@@ -46,6 +47,7 @@ public class NoteController {
                                Model model) {
         Note note = noteService.findById(id, userDetails.getUsername());
         model.addAttribute("note", note);
+        model.addAttribute("allNotes", noteService.findByUsername(userDetails.getUsername()));
         return "note-form";
     }
 

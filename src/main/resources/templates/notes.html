@@ -7,36 +7,52 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>My Notes</h1>
-            <div class="header-actions">
-                <span sec:authentication="name"></span>
-                <a th:href="@{/notes/new}" class="btn">New Note</a>
-                <form th:action="@{/logout}" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-logout">Logout</button>
-                </form>
-            </div>
-        </div>
-        
-        <div th:if="${success}" class="success" th:text="${success}"></div>
-        
-        <div class="notes-list" th:if="${not #lists.isEmpty(notes)}">
-            <div class="note-card" th:each="note : ${notes}">
-                <h3 th:text="${note.title}"></h3>
-                <p th:text="${#strings.abbreviate(note.content, 200)}"></p>
-                <div class="note-actions">
-                    <a th:href="@{/notes/{id}/edit(id=${note.id})}" class="btn btn-small">Edit</a>
-                    <form th:action="@{/notes/{id}/delete(id=${note.id})}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-small btn-danger" 
-                                onclick="return confirm('Are you sure?')">Delete</button>
+    <div class="app-container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <!-- Service Block -->
+            <div class="service-block">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="user-greeting" sec:authentication="name"></span>
+                    <form th:action="@{/logout}" method="post" style="display:inline;">
+                        <button type="submit" class="logout-link" style="background: none; border: none; cursor: pointer;">log out</button>
                     </form>
                 </div>
+                <div class="save-indicator">All changes saved</div>
+            </div>
+            
+            <!-- Notes Header -->
+            <div class="notes-header">
+                <h2 class="notes-title">Notes</h2>
+                <div class="notes-actions">
+                    <a th:href="@{/notes/new}" class="icon-btn" title="new note">+</a>
+                    <a href="#" class="icon-btn" title="edit">🖊</a>
+                    <a href="#" class="icon-btn" title="delete">✕</a>
+                </div>
+            </div>
+            
+            <!-- Notes List -->
+            <div class="notes-list-container">
+                <div th:if="${#lists.isEmpty(notes)}" class="empty-state">
+                    no notes yet. create your first note!
+                </div>
+                <a th:each="note : ${notes}" 
+                   th:href="@{/notes/{id}/edit(id=${note.id})}"
+                   class="note-item"
+                   th:text="${note.title}">
+                </a>
             </div>
         </div>
         
-        <div class="empty-state" th:if="${#lists.isEmpty(notes)}">
-            <p>No notes yet. Create your first note!</p>
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <div class="editor-container">
+                <div th:if="${success}" class="success" th:text="${success}" style="margin-bottom: 20px;"></div>
+                
+                <div th:if="${#lists.isEmpty(notes)}" class="empty-state" style="padding: 0;">
+                    <p style="color: #606060; font-size: 16px;">select a note or create a new one</p>
+                </div>
+            </div>
         </div>
     </div>
 </body>

@@ -1,20 +1,40 @@
 ```
 # Compiled and build artifacts
 *.class
-target/
+*.o
+*.obj
+*.out
+
 # Dependencies
+target/
+.gradle/
+
 # Logs and temp files
 *.log
 *.tmp
 *.swp
-# Environment
-.env
-.env.local
-.env.
+
 # Editors
 .vscode/
 .idea/
-```node_modules/
-.next/
-dist/
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Coverage reports
+coverage/
+htmlcov/
+*.coverage
+
+# Package manager
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build system
 build/
+dist/
+```.next/
