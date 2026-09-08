@@ -25,16 +25,6 @@ public class NoteService {
         return noteRepository.findByUserOrderByTitleAsc(user);
     }
 
-    public Note save(String username, String title, String content) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        Note note = new Note();
-        note.setTitle(title);
-        note.setContent(content);
-        note.setUser(user);
-        return noteRepository.save(note);
-    }
-
     public Note findById(Long id, String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -44,6 +34,23 @@ public class NoteService {
             throw new RuntimeException("Access denied");
         }
         return note;
+    }
+
+    public Note addNote(String username, String title, String content) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Note note = new Note();
+        note.setTitle(title);
+        note.setContent(content);
+        note.setUser(user);
+        return noteRepository.save(note);
+    }
+
+    public void updateNote(Long id, String username, String title, String content) {
+        Note note = findById(id, username);
+        note.setContent(content);
+        note.setTitle(title);
+        noteRepository.save(note);
     }
 
     public void deleteById(Long id, String username) {

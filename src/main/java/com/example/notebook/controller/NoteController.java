@@ -20,35 +20,36 @@ public class NoteController {
 
     @GetMapping("/notes")
     public String listNotes(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        model.addAttribute("activeNoteId", null);
+        model.addAttribute("notes", noteService.findByUsername(userDetails.getUsername()));
+        return "notes";
+    }
+
+    @GetMapping("/notes/{id}")
+    public String listNotesWithNote(@PathVariable Long id,
+                            @AuthenticationPrincipal UserDetails userDetails,
+                            Model model) {
+        Note note = noteService.findById(id, userDetails.getUsername());
+        model.addAttribute("activeNote", note);
+        model.addAttribute("activeNoteId", note.getId());
         model.addAttribute("notes", noteService.findByUsername(userDetails.getUsername()));
         return "notes";
     }
 
     @GetMapping("/notes/new")
-    public String newNoteForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        model.addAttribute("note", new Note());
-        model.addAttribute("allNotes", noteService.findByUsername(userDetails.getUsername()));
-        return "note-form";
+    public String getNewNote(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        model.addAttribute("activeNote", new Note());
+        model.addAttribute("notes", noteService.findByUsername(userDetails.getUsername()));
+        return "notes";
     }
 
-    @PostMapping("/notes")
-    public String saveNote(@RequestParam String title, 
-                          @RequestParam String content,
-                          @AuthenticationPrincipal UserDetails userDetails,
-                          RedirectAttributes redirectAttributes) {
-        noteService.save(userDetails.getUsername(), title, content);
-        redirectAttributes.addFlashAttribute("success", "Note created successfully");
+    @PostMapping("/notes/new")
+    public String saveNewNote(@AuthenticationPrincipal UserDetails userDetails,
+                              @RequestParam String title,
+                              @RequestParam String content,
+                              Model model) {
+        noteService.addNote(userDetails.getUsername(), title, content);
         return "redirect:/notes";
-    }
-
-    @GetMapping("/notes/{id}/edit")
-    public String editNoteForm(@PathVariable Long id, 
-                               @AuthenticationPrincipal UserDetails userDetails,
-                               Model model) {
-        Note note = noteService.findById(id, userDetails.getUsername());
-        model.addAttribute("note", note);
-        model.addAttribute("allNotes", noteService.findByUsername(userDetails.getUsername()));
-        return "note-form";
     }
 
     @PostMapping("/notes/{id}")
@@ -56,21 +57,16 @@ public class NoteController {
                             @RequestParam String title,
                             @RequestParam String content,
                             @AuthenticationPrincipal UserDetails userDetails,
-                            RedirectAttributes redirectAttributes) {
-        Note note = noteService.findById(id, userDetails.getUsername());
-        note.setTitle(title);
-        note.setContent(content);
-        noteService.save(userDetails.getUsername(), title, content);
-        redirectAttributes.addFlashAttribute("success", "Note updated successfully");
+                             Model model) {
+        noteService.updateNote(id, userDetails.getUsername(), title, content);
         return "redirect:/notes";
     }
 
     @PostMapping("/notes/{id}/delete")
     public String deleteNote(@PathVariable Long id,
                             @AuthenticationPrincipal UserDetails userDetails,
-                            RedirectAttributes redirectAttributes) {
+                             Model model) {
         noteService.deleteById(id, userDetails.getUsername());
-        redirectAttributes.addFlashAttribute("success", "Note deleted successfully");
         return "redirect:/notes";
     }
 }
