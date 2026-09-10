@@ -24,48 +24,30 @@
             <div class="notes-header">
                 <h2 class="notes-title">Notes</h2>
                 <div class="notes-actions">
-                    <a th:href="@{/notes/new}" class="icon-btn" title="new note">+</a>
-                    <form th:if="${activeNoteId != null}"
-                          th:action="@{/notes/{id}/delete(id=${activeNoteId})}"
-                          method="post"
-                          style="display: inline;">
-                        <button type="submit" class="icon-btn" title="delete">✕</button>
-                    </form>
+                    <a class="icon-btn js-note-create" title="new note">+</a>
+                    <button type="button"
+                            class="icon-btn js-note-delete"
+                            title="delete note">✕</button>
                 </div>
             </div>
             
             <!-- Notes List -->
-            <div class="notes-list-container">
-                <div th:if="${#lists.isEmpty(notes)}" class="empty-state">
-                    no notes yet. create your first note!
-                </div>
-                <a th:each="note : ${notes}"
-                   th:attr="id=${note.id}"
-                   th:text="${note.title}"
-                   class="note-item">
-                </a>
+            <div class="notes-list-container js-notes-list">
             </div>
         </div>
         
         <!-- Right Panel -->
         <div class="right-panel">
             <div class="editor-container">
-                <form id="activeNoteForm">
-                    <input type="hidden" id="activeNoteId" name="id">
-                    <input type="text"
-                           class="editor-title"
-                           id="activeNoteTitle"
-                           name="title"
-                           placeholder="untitled"
-                           autocomplete="off"
-                           required>
-                    <textarea class="editor-content"
-                              id="activeNoteContent"
-                              name="content"
-                              placeholder="start writing..."
-                              required></textarea>
-                    <button type="submit" class="btn btn-primary" style="width: auto; padding: 10px 30px;">save</button>
-                </form>
+                <input type="hidden" class="js-active-note-id">
+                <input type="text"
+                       class="editor-title js-active-note-title"
+                       placeholder="untitled"
+                       autocomplete="off"
+                       required>
+                <textarea class="editor-content js-active-note-content"
+                          placeholder="start writing..."
+                          required></textarea>
             </div>
         </div>
     </div>

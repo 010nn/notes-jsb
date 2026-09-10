@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/api")
 public class ApiController {
@@ -32,5 +34,27 @@ public class ApiController {
 
         noteService.updateNote(id, userDetails.getUsername(), dto.getTitle(), dto.getContent());
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/notes/{id}")
+    public ResponseEntity<Void> deleteNote(@PathVariable Long id,
+                                           @AuthenticationPrincipal UserDetails userDetails) {
+
+        noteService.deleteById(id, userDetails.getUsername());
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/notes")
+    public ResponseEntity<NoteDto> createNote(@RequestBody NoteDto dto,
+                                           @AuthenticationPrincipal UserDetails userDetails) {
+
+        NoteDto noteDto = noteService.createNote(userDetails.getUsername(), dto.getTitle(), dto.getContent());
+        return ResponseEntity.ok(noteDto);
+    }
+
+    @GetMapping("/notes")
+    public ResponseEntity<List<NoteDto>> getNotes(@AuthenticationPrincipal UserDetails userDetails) {
+        List<NoteDto> notes = noteService.findByUsername(userDetails.getUsername());
+        return ResponseEntity.ok(notes);
     }
 }

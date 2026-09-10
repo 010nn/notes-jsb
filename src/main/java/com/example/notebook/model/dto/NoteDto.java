@@ -22,10 +22,6 @@ public class NoteDto {
         this.content = note.getContent();
     }
 
-    public Boolean isNew() {
-        return this.id == null;
-    }
-
     public Long getId() {
         return id;
     }

@@ -153,7 +153,14 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    padding-left: 10%;
+    margin-left: 10%;
+}
+
+@media (max-width: 800px) {
+    .left-panel {
+        margin-left: 0;
+        width: 160px;
+    }
 }
 
 /* Service Block */
@@ -189,7 +196,7 @@ body {
 
 /* Notes Header */
 .notes-header {
-    padding: 5px 5px 5px 0;
+    padding: 5px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -205,6 +212,7 @@ body {
 .notes-actions {
     display: flex;
     gap: 8px;
+    padding: 0 5px;
 }
 
 .icon-btn {
@@ -303,7 +311,6 @@ body {
     border: none;
     color: #e0e0e0;
     font-size: 16px;
-    line-height: 1.8;
     resize: none;
 }
 

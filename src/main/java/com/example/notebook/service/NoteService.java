@@ -31,10 +31,13 @@ public class NoteService {
         return note;
     }
 
-    public List<Note> findByUsername(String username) {
+    public List<NoteDto> findByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return noteRepository.findByUserOrderByTitleAsc(user);
+        List<NoteDto> notesDto = noteRepository.findByUserOrderByTitleAsc(user).stream()
+                .map(note -> new NoteDto(note))
+                .toList();
+        return notesDto;
     }
 
     public NoteDto findById(Long id, String username) {
@@ -42,14 +45,14 @@ public class NoteService {
         return new NoteDto(note);
     }
 
-    public Note addNote(String username, String title, String content) {
+    public NoteDto createNote(String username, String title, String content) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Note note = new Note();
         note.setTitle(title);
         note.setContent(content);
         note.setUser(user);
-        return noteRepository.save(note);
+        return new NoteDto(noteRepository.save(note));
     }
 
     public void updateNote(Long id, String username, String title, String content) {
