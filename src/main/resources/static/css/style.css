@@ -148,18 +148,18 @@ body {
 
 /* Left Panel */
 .left-panel {
-    width: 20%;
+    width: 220px;
     border-right: 1px solid #333;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
 @media (max-width: 800px) {
     .left-panel {
+        width: 180px;
         margin-left: 0;
-        width: 160px;
     }
 }
 

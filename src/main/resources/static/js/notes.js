@@ -1,12 +1,19 @@
 const NotesApp = (function () {
 
+    const SaveStatus = {
+        SAVING: 'Saving...',
+        SAVED: 'All changes saved',
+        ERROR: 'No connection to the server'
+    };
+
     const DOM = {
         activeNoteId: document.querySelector('.js-active-note-id'),
         activeNoteTitle: document.querySelector('.js-active-note-title'),
         activeNoteContent: document.querySelector('.js-active-note-content'),
         btnNoteDelete: document.querySelector('.js-note-delete'),
         btnNoteCreate: document.querySelector('.js-note-create'),
-        notesList: document.querySelector('.js-notes-list')
+        notesList: document.querySelector('.js-notes-list'),
+        saveIndicator: document.querySelector('.js-save-indicator')
     }
 
     function getCookie(name) {
@@ -16,8 +23,7 @@ const NotesApp = (function () {
     }
 
     const csrfToken = getCookie('XSRF-TOKEN');
-    let noteId = null;
-    let noteSaveTimeout;
+    let noteId, noteSaveTimeout, shouldUpdateNotesList;
 
     function bindEvents() {
 
@@ -35,25 +41,20 @@ const NotesApp = (function () {
         });
 
         DOM.activeNoteContent.addEventListener('input', () => {
-            saveNotePlan(!noteId);
+            saveNotePlan();
         });
 
         DOM.activeNoteTitle.addEventListener('input', () => {
-            saveNotePlan(false);
+            saveNotePlan();
             updateNoteTitle();
         });
     }
 
-    function saveNotePlan(shouldReloadList) {
+    function saveNotePlan() {
         clearTimeout(noteSaveTimeout);
-        console.log('timeout set ', shouldReloadList);
-        noteSaveTimeout = setTimeout(() => {
-            saveNote().then(() => {
-                if (shouldReloadList) {
-                    loadNotes();
-                }
-            })
-        }, 1500);
+        shouldUpdateNotesList = !noteId;
+        updateSaveStatus(SaveStatus.SAVING);
+        noteSaveTimeout = setTimeout(saveNote, 1500);
     }
 
     function updateNoteTitle() {
@@ -131,8 +132,18 @@ const NotesApp = (function () {
                 const note = await response.json();
                 noteId = note.id;
             }
+
+            if (shouldUpdateNotesList) {
+                shouldUpdateNotesList = false;
+                loadNotes();
+            }
+
+
+            updateSaveStatus(SaveStatus.SAVED);
+
         } catch (error) {
             console.error('Не удалось сохранить:', error)
+            updateSaveStatus(SaveStatus.ERROR);
         }
     }
 
@@ -170,7 +181,7 @@ const NotesApp = (function () {
             const notes = await response.json();
 
             if (notes.length === 0) {
-                DOM.notesList.innerHTML = `<div class="empty-state">Нихуя нет :(</div>`;
+                DOM.notesList.innerHTML = `<div class="empty-state">Пусто...\nКак у тебя в голове :(</div>`;
                 return;
             }
 
@@ -185,8 +196,6 @@ const NotesApp = (function () {
             });
 
             const freshIds = new Set();
-
-            console.log('return ', notes);
 
             notes.forEach(note => {
                 const stringId = String(note.id);
@@ -234,7 +243,10 @@ const NotesApp = (function () {
         DOM.notesList.querySelectorAll('.note-item').forEach((item) => {
             item.classList.remove('active');
         })
+    }
 
+    function updateSaveStatus(saveStatus) {
+        DOM.saveIndicator.textContent = saveStatus;
     }
 
     return {
