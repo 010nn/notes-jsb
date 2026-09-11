@@ -8,6 +8,7 @@
 # Dependencies
 target/
 .gradle/
+out/
 
 # Logs and temp files
 *.log
