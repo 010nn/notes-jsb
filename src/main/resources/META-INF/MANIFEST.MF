@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Main-Class: com.notesjsb.NotebookApplication
+Class-Path: spring-boot-3.2.0.jar attoparser-2.0.7.RELEASE.jar snakeyaml
+ -2.2.jar spring-jdbc-6.1.1.jar thymeleaf-3.1.2.RELEASE.jar log4j-to-slf
+ 4j-2.21.1.jar jakarta.persistence-api-3.1.0.jar classmate-1.6.0.jar jak
+ arta.xml.bind-api-4.0.1.jar jackson-datatype-jdk8-2.15.3.jar jakarta.in
+ ject-api-2.0.1.jar hibernate-core-6.3.1.Final.jar slf4j-api-2.0.9.jar s
+ pring-boot-starter-json-3.2.0.jar spring-webmvc-6.1.1.jar jboss-logging
+ -3.5.3.Final.jar jackson-core-2.15.3.jar hibernate-commons-annotations-
+ 6.0.6.Final.jar byte-buddy-1.14.10.jar spring-context-6.1.1.jar spring-
+ tx-6.1.1.jar spring-aspects-6.1.1.jar jakarta.transaction-api-2.0.1.jar
+  spring-security-core-6.2.0.jar spring-aop-6.1.1.jar micrometer-commons
+ -1.12.0.jar thymeleaf-spring6-3.1.2.RELEASE.jar logback-classic-1.4.11.
+ jar jaxb-runtime-4.0.4.jar tomcat-embed-core-10.1.16.jar spring-jcl-6.1
+ .1.jar spring-boot-starter-web-3.2.0.jar jackson-module-parameter-names
+ -2.15.3.jar spring-boot-starter-tomcat-3.2.0.jar spring-security-crypto
+ -6.2.0.jar spring-core-6.1.1.jar jakarta.activation-api-2.1.2.jar postg
+ resql-42.6.0.jar logback-core-1.4.11.jar jaxb-core-4.0.4.jar txw2-4.0.4
+ .jar micrometer-observation-1.12.0.jar spring-security-config-6.2.0.jar
+  unbescape-1.1.6.RELEASE.jar jakarta.annotation-api-2.1.1.jar thymeleaf
+ -extras-springsecurity6-3.1.2.RELEASE.jar tomcat-embed-el-10.1.16.jar s
+ pring-beans-6.1.1.jar spring-boot-starter-logging-3.2.0.jar HikariCP-5.
+ 0.1.jar jandex-3.1.2.jar spring-security-web-6.2.0.jar jackson-databind
+ -2.15.3.jar spring-boot-starter-jdbc-3.2.0.jar spring-web-6.1.1.jar asp
+ ectjweaver-1.9.20.1.jar spring-boot-autoconfigure-3.2.0.jar antlr4-runt
+ ime-4.10.1.jar spring-expression-6.1.1.jar angus-activation-2.0.1.jar j
+ ul-to-slf4j-2.0.9.jar jackson-datatype-jsr310-2.15.3.jar spring-boot-st
+ arter-data-jpa-3.2.0.jar spring-data-commons-3.2.0.jar spring-boot-star
+ ter-security-3.2.0.jar istack-commons-runtime-4.1.2.jar spring-boot-sta
+ rter-3.2.0.jar lombok-1.18.46.jar checker-qual-3.31.0.jar spring-orm-6.
+ 1.1.jar spring-data-jpa-3.2.0.jar tomcat-embed-websocket-10.1.16.jar sp
+ ring-boot-starter-thymeleaf-3.2.0.jar log4j-api-2.21.1.jar spring-boot-
+ starter-aop-3.2.0.jar jackson-annotations-2.15.3.jar
+

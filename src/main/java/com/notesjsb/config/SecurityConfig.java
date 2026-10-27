@@ -1,6 +1,6 @@
-package com.example.notebook.config;
+package com.notesjsb.config;
 
-import com.example.notebook.service.CustomUserDetailsService;
+import com.notesjsb.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,10 +1,10 @@
-package com.example.notebook.service;
+package com.notesjsb.service;
 
-import com.example.notebook.model.Note;
-import com.example.notebook.model.User;
-import com.example.notebook.model.dto.NoteDto;
-import com.example.notebook.repository.NoteRepository;
-import com.example.notebook.repository.UserRepository;
+import com.notesjsb.model.Note;
+import com.notesjsb.model.User;
+import com.notesjsb.model.dto.NoteDto;
+import com.notesjsb.repository.NoteRepository;
+import com.notesjsb.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

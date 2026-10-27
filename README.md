@@ -16,62 +16,52 @@
 ## Структура проекта
 
 ```
-notebook-app/
-├── src/main/java/com/example/notebook/
-│   ├── NotebookApplication.java      # Главный класс приложения
-│   ├── config/
-│   │   └── SecurityConfig.java       # Конфигурация безопасности
-│   ├── controller/
-│   │   ├── AuthController.java       # Контроллер аутентификации
-│   │   └── NoteController.java       # Контроллер заметок
-│   ├── model/
-│   │   ├── User.java                 # Модель пользователя
-│   │   └── Note.java                 # Модель заметки
-│   ├── repository/
-│   │   ├── UserRepository.java       # Репозиторий пользователей
-│   │   └── NoteRepository.java       # Репозиторий заметок
-│   └── service/
-│       ├── UserService.java          # Сервис пользователей
-│       ├── NoteService.java          # Сервис заметок
-│       └── CustomUserDetailsService.java # Детали пользователя для Spring Security
-├── src/main/resources/
-│   ├── templates/
-│   │   ├── login.html                # Страница входа
-│   │   ├── register.html             # Страница регистрации
-│   │   ├── notes.html                # Список заметок
-│   │   └── note-form.html            # Форма создания/редактирования
-│   ├── static/css/
-│   │   └── style.css                 # Стили
-│   └── application.properties        # Конфигурация приложения
-├── docker-compose.yml                # Конфигурация PostgreSQL
-└── pom.xml                           # Maven зависимости
+notes-jsb/
+├── src/
+│   ├── main/
+│   │   ├── java/com/notesjsb/
+│   │   │   ├── NotesJSB.java              # Главный класс приложения
+│   │   │   ├── config/
+│   │   │   │   └── SecurityConfig.java    # Конфигурация безопасности
+│   │   │   ├── controller/
+│   │   │   │   ├── ApiController.java     # Контроллер api endpoints
+│   │   │   │   ├── AuthController.java    # Контроллер аутентификации
+│   │   │   │   ├── GlobalExceptionHandler.java
+│   │   │   │   └── NoteController.java    # Контроллер заметок
+│   │   │   ├── model/
+│   │   │   │   ├── dto/
+│   │   │   │   │   └── NoteDto.java
+│   │   │   │   ├── Note.java              # Модель заметки
+│   │   │   │   └── User.java              # Модель пользователя
+│   │   │   ├── repository/
+│   │   │   │   ├── NoteRepository.java    # Репозиторий заметок
+│   │   │   │   └── UserRepository.java    # Репозиторий пользователей
+│   │   │   └── service/
+│   │   │       ├── CustomUserDetailsService.java # Детали пользователя для Spring Security
+│   │   │       ├── NoteService.java       # Сервис заметок
+│   │   │       └── UserService.java       # Сервис пользователей
+│   │   └── resources/
+│   │       ├── static/
+│   │       │   ├── css/
+│   │       │   │   └── style.css
+│   │       │   └── js/
+│   │       │       └── notes.js
+│   │       ├── templates/
+│   │       │   ├── login.html                     # Страница входа
+│   │       │   ├── notes.html                     # Список заметок
+│   │       │   └── register.html                  # Страница регистрации
+│   │       ├── META-INF/
+│   │       └── application.properties             # Конфигурация приложения
+├── docker-compose.yml                             # Конфигурация PostgreSQL
+├── .env                                           # Переменные окружения
+└── pom.xml                                        # Maven зависимости
 ```
 
-## Запуск
-
-### 1. Запуск базы данных
+## Quick start
 
 ```bash
-cd notebook-app
+cd notes-jsb
 docker-compose up -d
-```
-
-Или с использованием новой команды Docker:
-
-```bash
-docker compose up -d
-```
-
-### 2. Запуск приложения
-
-```bash
-mvn spring-boot:run
-```
-
-Или запустить собранный jar-файл:
-
-```bash
-java -jar target/notebook-app-1.0.0.jar
 ```
 
 ### 3. Доступ к приложению

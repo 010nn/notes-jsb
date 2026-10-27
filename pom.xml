@@ -11,8 +11,8 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.example</groupId>
-    <artifactId>notebook-app</artifactId>
+    <groupId>com.notes-jsb</groupId>
+    <artifactId>notes-jsb</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

@@ -1,7 +1,7 @@
-package com.example.notebook.controller;
+package com.notesjsb.controller;
 
-import com.example.notebook.model.dto.NoteDto;
-import com.example.notebook.service.NoteService;
+import com.notesjsb.model.dto.NoteDto;
+import com.notesjsb.service.NoteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;

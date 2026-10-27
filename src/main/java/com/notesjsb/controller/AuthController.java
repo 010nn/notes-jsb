@@ -1,7 +1,7 @@
-package com.example.notebook.controller;
+package com.notesjsb.controller;
 
-import com.example.notebook.model.User;
-import com.example.notebook.service.UserService;
+import com.notesjsb.model.User;
+import com.notesjsb.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

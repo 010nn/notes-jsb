@@ -1,6 +1,6 @@
-package com.example.notebook.model.dto;
+package com.notesjsb.model.dto;
 
-import com.example.notebook.model.Note;
+import com.notesjsb.model.Note;
 
 public class NoteDto {
     Long id;

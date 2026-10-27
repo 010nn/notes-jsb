@@ -1,7 +1,7 @@
-package com.example.notebook.service;
+package com.notesjsb.service;
 
-import com.example.notebook.model.User;
-import com.example.notebook.repository.UserRepository;
+import com.notesjsb.model.User;
+import com.notesjsb.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

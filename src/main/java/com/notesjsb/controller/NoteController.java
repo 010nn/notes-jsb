@@ -1,6 +1,6 @@
-package com.example.notebook.controller;
+package com.notesjsb.controller;
 
-import com.example.notebook.service.NoteService;
+import com.notesjsb.service.NoteService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
