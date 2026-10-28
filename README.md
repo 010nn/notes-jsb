@@ -7,7 +7,7 @@ Minimalist web app for note-taking, with registaration.
 ## Screenshots
 
 ![Login page](screenshots\login_page.png)
-![Notes page](screenshots\notes_page.png.png)
+![Notes page](screenshots\notes_page.gif)
 
 ## Quick start
 
