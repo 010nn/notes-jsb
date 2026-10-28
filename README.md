@@ -1,15 +1,14 @@
-# notes-jsb (Java Spring Boot)
+# notes-jsb
 
 Minimalist web app for note-taking, with registaration.
 
----
+*(jsb - Java Spring Boot)*
 
-## Screenshots
+## 📸 Screenshots
 
-![Login page](screenshots\login_page.png)
-![Notes page](screenshots\notes_page.gif)
+![Login page](screenshots/login_page.png) ![Notes page](screenshots/notes_page.png)
 
-## Quick start
+## 🚀 Quick start
 
 ### 1. Clone the repository
 ```bash
@@ -34,8 +33,6 @@ docker-compose up -d
 ```
 The app will be up and running at: `http://localhost:8080` (or your custom `${JAVA_PORT}`)
 
----
-
 ## 🛠️ Tech Stack
 
 - Java 17
@@ -46,8 +43,6 @@ The app will be up and running at: `http://localhost:8080` (or your custom `${JA
 - PostgreSQL
 - Maven
 - Docker Compose
-
----
 
 ## 📁 Project structure
 
