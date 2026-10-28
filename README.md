@@ -1,6 +1,6 @@
 # notes-jsb
 
-Minimalistic web app for note-taking, with registration.
+Web application for notes, with registration.
 
 *(jsb - Java Spring Boot)*
 
