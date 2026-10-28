@@ -1,8 +1,42 @@
-# Минималистичный блокнот на Spring Boot
+# notes-jsb (Java Spring Boot)
 
-Приложение для ведения заметок с аутентификацией и регистрацией пользователей.
+Minimalist web app for note-taking, with registaration.
 
-## Технологии
+---
+
+## Screenshots
+
+![Login page](screenshots\login_page.png)
+![Notes page](screenshots\notes_page.png.png)
+
+## Quick start
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/010nn/notes-jsb.git
+cd notes-jsb
+```
+
+### 2. Environment Variables Setup
+Create a `.env` file in the root directory and configure your variables:
+```env
+DB_NAME=db
+DB_USER=user
+DB_PASSWORD=password
+DB_PORT=5432
+
+JAVA_PORT=8080
+```
+
+### 3. Run with Docker Compose
+```bash
+docker-compose up -d
+```
+The app will be up and running at: `http://localhost:8080` (or your custom `${JAVA_PORT}`)
+
+---
+
+## 🛠️ Tech Stack
 
 - Java 17
 - Spring Boot 3.2.0
@@ -13,33 +47,35 @@
 - Maven
 - Docker Compose
 
-## Структура проекта
+---
+
+## 📁 Project structure
 
 ```
 notes-jsb/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/notesjsb/
-│   │   │   ├── NotesJSB.java              # Главный класс приложения
+│   │   │   ├── NotesJSB.java              # Main application entry point
 │   │   │   ├── config/
-│   │   │   │   └── SecurityConfig.java    # Конфигурация безопасности
+│   │   │   │   └── SecurityConfig.java    # Spring Security configuration
 │   │   │   ├── controller/
-│   │   │   │   ├── ApiController.java     # Контроллер api endpoints
-│   │   │   │   ├── AuthController.java    # Контроллер аутентификации
+│   │   │   │   ├── ApiController.java     # REST api endpoints controller
+│   │   │   │   ├── AuthController.java    # Authentication & Registration controller
 │   │   │   │   ├── GlobalExceptionHandler.java
-│   │   │   │   └── NoteController.java    # Контроллер заметок
+│   │   │   │   └── NoteController.java    # Web UI notes controller
 │   │   │   ├── model/
 │   │   │   │   ├── dto/
 │   │   │   │   │   └── NoteDto.java
-│   │   │   │   ├── Note.java              # Модель заметки
-│   │   │   │   └── User.java              # Модель пользователя
+│   │   │   │   ├── Note.java              # Note entity model
+│   │   │   │   └── User.java              # User entity model
 │   │   │   ├── repository/
-│   │   │   │   ├── NoteRepository.java    # Репозиторий заметок
-│   │   │   │   └── UserRepository.java    # Репозиторий пользователей
+│   │   │   │   ├── NoteRepository.java    # Notes database repository
+│   │   │   │   └── UserRepository.java    # Users database repository
 │   │   │   └── service/
-│   │   │       ├── CustomUserDetailsService.java # Детали пользователя для Spring Security
-│   │   │       ├── NoteService.java       # Сервис заметок
-│   │   │       └── UserService.java       # Сервис пользователей
+│   │   │       ├── CustomUserDetailsService.java     # UserDetails service for Security
+│   │   │       ├── NoteService.java       # Notes business logic service
+│   │   │       └── UserService.java       # Users business logic service
 │   │   └── resources/
 │   │       ├── static/
 │   │       │   ├── css/
@@ -47,57 +83,13 @@ notes-jsb/
 │   │       │   └── js/
 │   │       │       └── notes.js
 │   │       ├── templates/
-│   │       │   ├── login.html                     # Страница входа
-│   │       │   ├── notes.html                     # Список заметок
-│   │       │   └── register.html                  # Страница регистрации
+│   │       │   ├── login.html                     # Login page template
+│   │       │   ├── notes.html                     # Main notes page template
+│   │       │   └── register.html                  # Registration page template
 │   │       ├── META-INF/
-│   │       └── application.properties             # Конфигурация приложения
-├── docker-compose.yml                             # Конфигурация PostgreSQL
-├── .env                                           # Переменные окружения
-└── pom.xml                                        # Maven зависимости
+│   │       └── application.properties             # Spring boot application config
+├── docker-compose.yml                             # PostgreSQL & App container orchestration
+├── Dockerfile                                     # Multi-stage Docker build for Java app (Maven + JRE)
+├── .env                                           # Local environment variables
+└── pom.xml                                        # Project Maven dependencies
 ```
-
-## Quick start
-
-```bash
-cd notes-jsb
-docker-compose up -d
-```
-
-### 3. Доступ к приложению
-
-Откройте браузер и перейдите по адресу: http://localhost:8080
-
-## Функционал
-
-- **Регистрация**: Создание нового аккаунта
-- **Вход/Выход**: Аутентификация пользователей
-- **Создание заметок**: Добавление новых заметок с заголовком и содержимым
-- **Редактирование**: Изменение существующих заметок
-- **Удаление**: Удаление заметок
-- **Просмотр**: Отображение списка всех заметок пользователя
-
-## API Endpoints
-
-| Метод | Путь | Описание |
-|-------|------|----------|
-| GET | /login | Страница входа |
-| GET | /register | Страница регистрации |
-| POST | /register | Регистрация пользователя |
-| GET | /notes | Список заметок |
-| GET | /notes/new | Форма создания заметки |
-| POST | /notes | Создание заметки |
-| GET | /notes/{id}/edit | Форма редактирования |
-| POST | /notes/{id} | Обновление заметки |
-| POST | /notes/{id}/delete | Удаление заметки |
-
-## Конфигурация
-
-По умолчанию приложение использует:
-- Порт: 8080
-- PostgreSQL: localhost:5432
-- База данных: notebook_db
-- Пользователь БД: notebook_user
-- Пароль БД: notebook_pass
-
-Для изменения настроек отредактируйте `src/main/resources/application.properties`.

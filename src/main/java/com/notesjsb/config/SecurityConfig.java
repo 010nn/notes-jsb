@@ -44,10 +44,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf
-                        // 1. Указываем хранить токен в куках и разрешаем доступ для JS
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        // 2. Для Spring Boot 3+ важно явно указать обработчик,
-                        // чтобы токен автоматически отправлялся в куку при GET запросе страницы
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
                 )
                 .authenticationProvider(authenticationProvider())
